@@ -16,9 +16,9 @@ class Point:
         self.name = name
         self.tag = tag
 
-# -------------------------------------------------------------------------------
-# Instance methods (behavior belongs to the object)
-# -------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------
+    # Instance methods (behavior belongs to the object)
+    # -------------------------------------------------------------------------------
     def to_tuple(self) -> tuple[float, float]:
         """
         Return the coordinate as a (lon, lat) tuple,
@@ -32,11 +32,11 @@ class Point:
     # Static method (pure spatial math)
     # ---------------------------------------------------------------------------
     @staticmethod
-    def harvesine_m(
+    def haversine_m(
         lon1: float, lat1: float, lon2: float, lat2: float
     ) -> float:
         """
-        Compute the Harvensine distance between two lon/lat pairs in meters.
+        Compute the Haversine distance between two lon/lat pairs in meters.
 
         Static method because it does not depent on object state
         """
@@ -45,11 +45,11 @@ class Point:
         phi1 = math.radians(lat1)
         phi2 = math.radians(lat2)
         dphi = math.radians(lat2 - lat1)
-        dlamba = math.radians(lon2 -lon1)
+        dlambda = math.radians(lon2 -lon1)
         
         a = (
             math.sin(dphi / 2) ** 2
-            + mat.cos(phi1)
+            + math.cos(phi1)
             * math.cos(phi2)
             * math.sin(dlambda / 2) ** 2
         )

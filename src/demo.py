@@ -5,8 +5,8 @@ p = Point("A", 121.0, 14.6)
 print(p.id, p.lon, p.lat)
 print(p.to_tuple())
 
-r = Point("B", 120.6, 16.4)
-print(p.distance_to(r))
+a = Point("B", 120.6, 16.4)
+print(p.distance_to(a))
 
 q = Point("X", 999, 14)
 print(q.id, q.lon, q.lat)
