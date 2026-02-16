@@ -1,7 +1,7 @@
 # Simple Spatial Objects in Python
 # How to set up the virtual environment
 # How to run Python scripts
-# Refelection
+# Reflection
 # Object vs Geometry
 When I first looked at the CSV, each row felt like just another entry to process, but the moment I turned a row into a Point object, it stopped being a record and started being a thing that could speak for itself. A point wasn't just  "121.0, 14.6", it had an identity, a place, and optional meaning. It could defend its own validity rejecting bad coordinates right at construction and could do something like give me a tuple, tell me if it's a POI, and measure a distance to another point.
 
