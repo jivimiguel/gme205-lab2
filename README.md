@@ -1,3 +1,15 @@
 # Simple Spatial Objects in Python
 # How to set up the virtual environment
 # How to run Python scripts
+# Refelection
+# Object vs Geometry
+When I first looked at the CSV, each row felt like just another entry to process, but the moment I turned a row into a Point object, it stopped being a record and started being a thing that could speak for itself. A point wasn't just  "121.0, 14.6", it had an identity, a place, and optional meaning. It could defend its own validity rejecting bad coordinates right at construction and could do something like give me a tuple, tell me if it's a POI, and measure a distance to another point.
+
+That shift changed how I thought about the data. Instead of letting scattered helper functions orbit around a table, I placed the ruls inside the thing they belong to. It felt less like juggling columns and more like talking to small, well-mannered spatial agents. i wasn't checking lat or lon again in the script, I was asking the point to enforce its own contract. That made my code calmer, and my mental model cleaner.
+# Responsibility
+I learned to keep point-level ruls in Point, collection-level behavior in PointSet, and visualization in the runner script.
+In Point: coordinate validation and spatial math that belongs to a single object. For example, te distance_to() delegates to a static haversine_m() the mat is pure, and the instance method expresses the interaction between two points.
+In PointSet: group responsibilities like count(), bbox(), and filter_by_tag(tag) without re-validating coordinates. PointSet coordinates between points but doesn't reach to plotting.
+In Running Script: I load data, produce the scatter plot, and JSON summary, and handle any edge cases around empty data.
+# Modeling Insight
+Separating geometry, meaning, and behavior made the whole spatial story easiear to follow. Geometry stayed minimal and honest. While the meaning, the name and tag, travled with the point so I could filter sematically without touching the geometry. And te behavior lived where it bleonged. Validity rules and distance with Point, grouping logic with PointSet, and all file or plot responsibilities in the runner. Because each rule had a home, the code never grew a “God function.” I didn’t have a giant script that did everything from parsing CSV to computing distances to drawing plots. Instead, the runner read like a narrative: load point set and ask it for what it knows (count, bbox, subsets) the visualize and generate report. When I hit bugs (typos, indentation, empty CSV), the boundaries helped me debug faster. If plotting broke, I checked the runner and if bbox looked off, I checked PointSet and if numbers were weird, I checked Point. That clarity is exactly what the lab was pushing me toward—designing spatial objects first, letting code follow that design.
