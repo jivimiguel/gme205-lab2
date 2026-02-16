@@ -1,0 +1,17 @@
+{
+  "total_point_count": 10,
+  "bounding_box": {
+    "min_lon": 121.0538,
+    "min_lat": 14.6478,
+    "max_lon": 121.0672,
+    "max_lat": 14.6573
+  },
+  "counts_per_tag": {
+    "poi": 3,
+    "school": 1,
+    "gate": 1,
+    "building": 3,
+    "landmark": 1,
+    "road": 1
+  }
+}
