@@ -77,7 +77,7 @@ class Point:
 # --------------------------------------------------------------------------------
 class PointSet:
     def __init__(self, points):
-        self.points = points
+        self._points = points
     
     @classmethod
     def from_csv(cls, path):
@@ -89,7 +89,7 @@ class PointSet:
             reader = csv.DictReader(f)
             for row in reader:
                 try:
-                    p = Point.fromrow(row)
+                    p = Point.from_row(row)
                     points.append(p)
                 except ValueError:
                     continue
@@ -105,15 +105,25 @@ class PointSet:
         """
         Return (min_lon, min_lat, max_lon, max_lat) for the collection.
         """
-        lons = [p.lon for p in self._points]
-        lats = [p.lat for p in self._poins]
-        return (min(lons), min(lats), max(lons), max(lats))
+        lon = [p.lon for p in self._points]
+        lat = [p.lat for p in self._points]
+        return (min(lon), min(lat), max(lon), max(lat))
     
     def filter_by_tag(self, tag):
         """
         Return a New PointSet containing only points with the given tag without mutating the original set.
         """
         tag_lower = (tag or "").lower()
-        subset = [p for p in self.points if (p.tag or "").lower() == tag_lower]
+        subset = [p for p in self._points if (p.tag or "").lower() == tag_lower]
         return PointSet(subset)
         
+    def get_tag_counts(self):
+        """
+        Returns a dictionary with the count of each tag
+        """
+        counts = {}
+        for p in self._points:
+            # Use "unlabeled" if the tag is None or empty
+            tag_name = p.tag if p.tag else "unlabeled"
+            counts[tag_name] = counts.get(tag_name, 0) + 1
+        return counts    
